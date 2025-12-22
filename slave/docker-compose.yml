@@ -1,0 +1,28 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: slave-nginx
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - nginx-logs:/var/log/nginx
+    networks: [elk-net]
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:9.1.5
+    container_name: slave-filebeat
+    user: root
+    command: filebeat -e --strict.perms=false
+    volumes:
+      - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - nginx-logs:/var/log/nginx
+    depends_on: [nginx]
+    networks: [elk-net]
+
+volumes:
+  nginx-logs:
+
+networks:
+  elk-net:
+    external: true

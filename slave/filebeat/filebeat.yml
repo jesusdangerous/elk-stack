@@ -2,8 +2,6 @@ filebeat.inputs:
   - type: filestream
     id: nginx-logs
     enabled: true
-    prospector.scanner.fingerprint.length: 128
-    prospector.scanner.fingerprint.offset: 0
     paths:
       - /var/log/nginx/app_access.log
       - /var/log/nginx/app_error.log
@@ -15,4 +13,4 @@ filebeat.inputs:
 output.logstash:
   hosts: ["logstash:5044"]
 
-logging.level: info
+logging.level: debug

@@ -1,6 +1,6 @@
 services:
   nginx:
-    image: nginx:latest
+    image: nginx:1.29.4-alpine-slim
     container_name: slave-nginx
     ports:
       - "8080:8080"

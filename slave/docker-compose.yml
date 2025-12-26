@@ -20,6 +20,14 @@ services:
     depends_on: [nginx]
     networks: [elk-net]
 
+  zabbix-agent-slave:
+      image: zabbix/zabbix-agent2:alpine-latest
+      container_name: zabbix-agent-slave
+      environment:
+        ZBX_SERVER_HOST: zabbix-server
+        ZBX_SERVER_PORT: 10051
+        ZBX_HOSTNAME: slave-host
+      networks: [elk-net]
 volumes:
   nginx-logs:
 

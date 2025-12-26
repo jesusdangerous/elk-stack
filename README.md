@@ -25,6 +25,9 @@ docker compose up -d elasticsearch
 cd ..
 sleep 20
 
+curl -u elastic:changeme -X POST http://localhost:9200/_security/user/kibana_system/_password   -H 'Content-Type: application/json' -d '{"password":"kibana123!"}'
+
+
 # 1) ILM policy (rollover 1m, delete 7m)
 curl -X PUT "http://localhost:9200/_ilm/policy/nginx-logs-policy" \
   -H "Content-Type: application/json" -u elastic:changeme \

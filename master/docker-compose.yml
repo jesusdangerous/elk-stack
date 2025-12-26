@@ -33,6 +33,19 @@ services:
     depends_on: [elasticsearch]
     networks: [elk-net]
 
+  grafana:
+      image: grafana/grafana:latest
+      container_name: grafana
+      environment:
+      - GF_INSTALL_PLUGINS=alexanderzobnin-zabbix-app
+      depends_on:
+        - elasticsearch
+      ports:
+        - "3000:3000"
+      networks:
+        elk-net:
+          ipv4_address: 172.20.0.30
+  
   zabbix-db:
     image: mysql:8.0
     container_name: zabbix-db

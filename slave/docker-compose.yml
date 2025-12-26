@@ -27,7 +27,10 @@ services:
         ZBX_SERVER_HOST: zabbix-server
         ZBX_SERVER_PORT: 10051
         ZBX_HOSTNAME: slave-host
-      networks: [elk-net]
+      networks:
+        elk-net:
+          ipv4_address: 172.20.0.21
+
 volumes:
   nginx-logs:
 
